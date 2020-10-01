@@ -6,6 +6,7 @@ const description = document.querySelector('.description');
 const submitButton = document.querySelector('.submit-button');
 const tableRef = document.querySelector('.table');
 
+
 class Expense {
 	constructor(expense){
 		this.amount = expense.amount;
@@ -36,6 +37,36 @@ const attachEventListener = (expenseObject) => {
 	})
 }
 
+const validateAmount = () => {
+	const currencyRegex = /^\d+(?:\.\d{0,2})$/;
+	const amountText = amount.value;
+	if (!currencyRegex.test(amountText)){
+		alert('Please enter a valid amount (do not leave blank).');
+		return false;
+	}
+
+	return true;
+}
+
+
+const validateText = () => {
+	const textOnlyRegex = /^[a-z]+$/i;
+	const merchantText = merchant.value;
+	const descriptionText = description.value;
+	if(!textOnlyRegex.test(merchantText) || !textOnlyRegex.test(descriptionText)){
+		alert('Please enter text only for both Merchant and Description (do not leave blank).');
+		return false;
+	}
+	return true;	
+}
+
+const clearInputs = () => {
+	amount.value = '';
+	description.value = '';
+	merchant.value = '';
+	date.value = 'mm/dd/yyyy';
+}
+
 const insertCells = (expenseObject, newRow, newCell) => {
 	for (let prop in expenseObject){
 		if (prop === 'deleteRow'){
@@ -62,5 +93,11 @@ const insertRow = (expenseObject) => {
 }
 
 submitButton.addEventListener('click', function(){
-	createExpense();
+	const isAmountValid = validateAmount();
+	const isTextValid = validateText();
+	const isDate = date.value ? true : alert('Please enter a Date');
+	if (isAmountValid && isTextValid && isDate) {
+		createExpense();
+	}
+	clearInputs();
 })
