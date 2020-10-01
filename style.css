@@ -1,3 +1,15 @@
+body{
+	font-family: 'Poppins', 'sans-serif';
+	background-color: #BFE5FA;
+}
+h1{
+	color: #071E2B;
+}
+
+thead{
+	background-color: white;
+}
+
 .container{
 	display: flex;
 	flex-direction: row;
@@ -7,16 +19,16 @@
 	flex-direction: column;
 	width: 100%;
 	height: 100vh;
-	border: 1px solid black;
 	align-items: center;
 }
 .categories{
 	display: flex;
 	flex-direction: row;
-	width: 300px;
+	width: 400px;
 	height: 300px;
 	border: 2px solid black;
 	padding: 20px 40px 20px 40px;
+	background-color: #367CA1;
 }
 .titles{
 	display: flex;
@@ -33,6 +45,7 @@
 }
 button{
 	margin-top: 40px;
+	background-color: #367CA1;
 }
 
 .current-expenses{
@@ -40,7 +53,6 @@ button{
 	flex-direction: column;
 	width: 100%;
 	height: 100vh;
-	border: 1px solid black;
 	align-items: center;
 }
 table{

@@ -3,6 +3,8 @@
 <head>
 	<title>Expense Tracker</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body class="container">
 	<div class="new-expenses">
@@ -15,10 +17,10 @@
 				<label>Description:</label>
 			</div>
 			<div class="inputs">
-				<input type="" name="" class="amount">
-				<input type="" name="" class="date">
-				<input type="" name="" class="merchant">
-				<input type="" name="" class="description">
+				<input type="number" name="" class="amount">
+				<input type="date" name="" class="date">
+				<input type="text" name="" class="merchant">
+				<input type="text" name="" class="description">
 			</div>
 		</div>
 		<button class="submit-button">Submit Expense</button>
@@ -31,7 +33,8 @@
 					<th>Amount</th>
 					<th>Date</th>
 					<th>Merchant</th>
-					<th>Description</th>
+					<th>Description </th>
+					<th><i class="fa fa-trash"></i></th>
 				</tr>
 			</thead>
 		</table>

@@ -4,8 +4,7 @@ const date = document.querySelector('.date');
 const merchant = document.querySelector('.merchant');
 const description = document.querySelector('.description');
 const submitButton = document.querySelector('.submit-button');
-//const newCell = document.createElement('td')
-//each time the submit button is pressed
+const tableRef = document.querySelector('.table');
 
 class Expense {
 	constructor(expense){
@@ -13,6 +12,8 @@ class Expense {
 		this.date = expense.date;
 		this.merchant = expense.merchant;
 		this.description = expense.description;
+		this.deleteRow = document.createElement('i');
+		this.newRow = tableRef.insertRow(-1);
 	}
 }
 
@@ -26,24 +27,40 @@ const createExpense = () => {
 	let expenseObject = new Expense(userInput);
 	expensesArray.push(expenseObject);
 	insertRow(expenseObject);
+	attachEventListener(expenseObject);
+}
+
+const attachEventListener = (expenseObject) => {
+	expenseObject.deleteRow.addEventListener('click', function(){
+		deleteRow(expenseObject);
+	})
 }
 
 const insertCells = (expenseObject, newRow, newCell) => {
 	for (let prop in expenseObject){
-		let newCell = newRow.insertCell(-1);
-		let newCellText = document.createTextNode(expenseObject[prop]);
-		newCell.appendChild(newCellText);
+		if (prop === 'deleteRow'){
+			expenseObject[prop].classList = 'fa fa-trash';
+			let newCell = newRow.insertCell(-1);
+			newCell.appendChild(expenseObject[prop]);
+		} else if (prop === 'newRow'){
+			//skip
+		} else {
+			let newCell = newRow.insertCell(-1);
+			let newCellText = document.createTextNode(expenseObject[prop]);
+			newCell.appendChild(newCellText);
+		}
 	}
 }
 
+const deleteRow = (expenseObject) => {
+	tableRef.deleteRow(expenseObject.newRow.rowIndex);
+}
+
 const insertRow = (expenseObject) => {
-	let tableRef = document.querySelector('.table');
-	let newRow = tableRef.insertRow(-1);
+	let newRow = expenseObject.newRow;
 	insertCells(expenseObject, newRow);
 }
 
 submitButton.addEventListener('click', function(){
-	//check whether or not all input fields were filled
-	//insert newRow
 	createExpense();
 })
