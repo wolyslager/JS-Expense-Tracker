@@ -28,6 +28,7 @@ const createExpense = () => {
 	expensesArray.push(expenseObject);
 	insertRow(expenseObject);
 	attachEventListener(expenseObject);
+	clearInputs();
 }
 
 const attachEventListener = (expenseObject) => {
@@ -97,5 +98,4 @@ submitButton.addEventListener('click', function(){
 	if (isAmountValid && isTextValid && isDate) {
 		createExpense();
 	}
-	clearInputs();
 })
