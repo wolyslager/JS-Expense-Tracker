@@ -6,7 +6,6 @@ const description = document.querySelector('.description');
 const submitButton = document.querySelector('.submit-button');
 const tableRef = document.querySelector('.table');
 
-
 class Expense {
 	constructor(expense){
 		this.amount = expense.amount;
@@ -47,7 +46,6 @@ const validateAmount = () => {
 
 	return true;
 }
-
 
 const validateText = () => {
 	const textOnlyRegex = /^[a-z]+$/i;
