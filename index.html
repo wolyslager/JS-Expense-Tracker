@@ -7,24 +7,26 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body class="container">
-	<div class="new-expenses">
-		<h1>New Expenses</h1>
-		<div class="categories">
-			<div class="titles">
-				<label>Amount:</label>
-				<label>Date:</label>
-				<label>Merchant:</label>
-				<label>Description:</label>
+	<form>
+		<div class="new-expenses">
+			<h1>New Expenses</h1>
+			<div class="categories">
+				<div class="titles">
+					<label>Amount:</label>
+					<label>Date:</label>
+					<label>Merchant:</label>
+					<label>Description:</label>
+				</div>
+				<div class="inputs">
+					<input type="number" name="" class="amount"required>
+					<input type="date" name="" class="date"required>
+					<input type="text" name="" class="merchant"required>
+					<input type="text" name="" class="description"required>
+				</div>
 			</div>
-			<div class="inputs">
-				<input type="number" name="" class="amount">
-				<input type="date" name="" class="date">
-				<input type="text" name="" class="merchant">
-				<input type="text" name="" class="description">
-			</div>
+			<button class="submit-button" type="submit">Submit Expense</button>
 		</div>
-		<button class="submit-button">Submit Expense</button>
-	</div>
+	</form>
 	<div class="current-expenses">
 		<h1>Current Expenses</h1>
 		<table class="table">

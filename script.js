@@ -1,9 +1,8 @@
-let expensesArray =[];
 const amount = document.querySelector('.amount');
 const date = document.querySelector('.date');
 const merchant = document.querySelector('.merchant');
 const description = document.querySelector('.description');
-const submitButton = document.querySelector('.submit-button');
+const expenseForm = document.querySelector('form');
 const tableRef = document.querySelector('.table');
 
 class Expense {
@@ -25,7 +24,6 @@ const createExpense = () => {
 		description: description.value
 	}
 	let expenseObject = new Expense(userInput);
-	expensesArray.push(expenseObject);
 	insertRow(expenseObject);
 	attachEventListener(expenseObject);
 	clearInputs();
@@ -37,33 +35,8 @@ const attachEventListener = (expenseObject) => {
 	})
 }
 
-const validateAmount = () => {
-	const currencyRegex = /^\d+(?:\.\d{0,2})$/;
-	const amountText = amount.value;
-	if (!currencyRegex.test(amountText)){
-		alert('Please enter a valid amount (do not leave blank).');
-		return false;
-	}
-
-	return true;
-}
-
-const validateText = () => {
-	const textOnlyRegex = /^[a-z]+$/i;
-	const merchantText = merchant.value;
-	const descriptionText = description.value;
-	if(!textOnlyRegex.test(merchantText) || !textOnlyRegex.test(descriptionText)){
-		alert('Please enter text only for both Merchant and Description (do not leave blank).');
-		return false;
-	}
-	return true;	
-}
-
 const clearInputs = () => {
-	amount.value = '';
-	description.value = '';
-	merchant.value = '';
-	date.value = 'mm/dd/yyyy';
+	expenseForm.reset();
 }
 
 const insertCells = (expenseObject, newRow, newCell) => {
@@ -72,9 +45,7 @@ const insertCells = (expenseObject, newRow, newCell) => {
 			expenseObject[prop].classList = 'fa fa-trash';
 			let newCell = newRow.insertCell(-1);
 			newCell.appendChild(expenseObject[prop]);
-		} else if (prop === 'newRow'){
-			//skip
-		} else {
+		} else if (prop !== 'newRow'){
 			let newCell = newRow.insertCell(-1);
 			let newCellText = document.createTextNode(expenseObject[prop]);
 			newCell.appendChild(newCellText);
@@ -91,11 +62,13 @@ const insertRow = (expenseObject) => {
 	insertCells(expenseObject, newRow);
 }
 
-submitButton.addEventListener('click', function(){
-	const isAmountValid = validateAmount();
-	const isTextValid = validateText();
-	const isDate = date.value ? true : alert('Please enter a Date');
-	if (isAmountValid && isTextValid && isDate) {
+expenseForm.addEventListener('submit', function(e){
+	e.preventDefault();
+	const isAmountValid = amount.checkValidity();
+	const isDateValid = date.checkValidity();
+	const isMerchantValid = merchant.checkValidity();
+	const isDescriptionValid = description.checkValidity();
+	if (isAmountValid && isDateValid && isMerchantValid && isDescriptionValid) {
 		createExpense();
 	}
 })
